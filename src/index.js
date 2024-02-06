@@ -21,7 +21,7 @@ const prepareAndStartServer =()=> {
         if(process.env.DB_SYNC) {
             db.sequelize.sync({alter:true});
         }
-        
+     
         // const service=new UserService();
         // // const newToken = service.createToken({email:'abhijeet@admin.com',id:1});
         // // console.log("new Token is",newToken);
