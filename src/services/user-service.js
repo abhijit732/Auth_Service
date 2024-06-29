@@ -28,7 +28,7 @@ class UserService {
             const user= await this.userRepository.getByEmail(email);
             // Step 2 -> Compare incoming plain password with stored encrypted password
             const passwordsMatch= this.checkPassword(plainPassword,user.password);
-
+            //console.log(user.password);
             if(!passwordsMatch) {
                 console.log("Password doesn't match");
                 throw {error: 'Incorrect password' };
@@ -37,6 +37,9 @@ class UserService {
             const newJWT=this.createToken({email: user.email, id:user.id});
             return newJWT;
         } catch (error) {
+            if(error.name== 'AttributeNotFound') {
+                throw error;
+            }
             console.log("Something went wrong in the sign in process");
             throw error;
         }
